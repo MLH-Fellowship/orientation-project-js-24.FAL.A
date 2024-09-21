@@ -1,5 +1,6 @@
 import { React, useState, useEffect } from 'react';
 import './ExperienceComponent.css';
+import { API_URL } from '../../constants';
 
 
 function AddEditExperienceComponent({experienceToEdit, onAddExperienceButtonClick }) {
@@ -49,7 +50,7 @@ function AddEditExperienceComponent({experienceToEdit, onAddExperienceButtonClic
     }
     
     
-        fetch('http://127.0.0.1:5000/resume/experience', {
+        fetch(`${API_URL}/resume/experience`, {
             method: 'POST',
             body: data,
         })

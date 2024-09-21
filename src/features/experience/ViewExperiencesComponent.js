@@ -1,5 +1,6 @@
 import { React, useEffect, useState } from "react";
 import './ExperienceComponent.css';
+import { API_URL } from '../../constants';
 
 
 function ViewExperiencesComponent({onEditExperience}) {
@@ -9,7 +10,7 @@ function ViewExperiencesComponent({onEditExperience}) {
 
 
     useEffect(() => {
-        fetch('http://127.0.0.1:5000/resume/experience', {
+        fetch(`${API_URL}/resume/experience`, {
             method: 'GET',
         })
             .then(response => response.json())
@@ -58,7 +59,7 @@ function ViewExperiencesComponent({onEditExperience}) {
                                 <td>
                                 {experience.logo ? (
                                         <img 
-                                            src={`http://127.0.0.1:5000/uploads/${experience.logo}`} 
+                                            src={`${API_URL}/uploads/${experience.logo}`} 
                                             alt={experience.logo} 
                                             style={{ width: '50px', height: '50px' }} 
                                         />
