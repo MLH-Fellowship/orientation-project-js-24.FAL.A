@@ -1,10 +1,16 @@
 import "./App.css";
 import ExperienceComponent from "./features/experience/ExperienceComponent";
+import UserInformationComponent from "./features/user-information/UserInformationComponent";
 
 function App() {
   return (
     <div className="App">
       <h1>Resume Builder</h1>
+      <div className="resumeSection">
+        <h2>User Information</h2>
+        <UserInformationComponent/>
+        <br></br>
+      </div>
       <div className="resumeSection">
         <h2>Experience</h2>
         <ExperienceComponent/>
