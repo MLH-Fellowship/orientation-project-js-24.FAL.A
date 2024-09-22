@@ -1,11 +1,14 @@
-import { React, useState } from 'react';
-import ViewExperiencesComponent from './ViewExperiencesComponent';
-import AddEditExperienceComponent from './AddEditExperienceComponent';
+import { React, useState } from "react";
+import ViewExperiencesComponent from "./ViewExperiencesComponent";
+import AddEditExperienceComponent from "./AddEditExperienceComponent";
 
 function ExperienceComponent() {
-
-  const [displayAddEditExperienceComponent, setDisplayAddEditExperienceComponent] = useState(false);
-  const [displayAddExperienceButton, setDisplayAddExperienceButton] = useState(true);
+  const [
+    displayAddEditExperienceComponent,
+    setDisplayAddEditExperienceComponent,
+  ] = useState(false);
+  const [displayAddExperienceButton, setDisplayAddExperienceButton] =
+    useState(true);
   const [experienceToEdit, setExperienceToEdit] = useState(null);
 
   function toggleDisplayAddEditExperienceComponent() {
@@ -30,17 +33,21 @@ function ExperienceComponent() {
 
   return (
     <div>
-      {displayAddEditExperienceComponent ? <AddEditExperienceComponent
-        onAddExperienceButtonClick={onAddExperienceButtonClick}
-        experienceToEdit={experienceToEdit} /> :
-        <ViewExperiencesComponent
-          onEditExperience={handleExperienceToEdit} />}
+      {displayAddEditExperienceComponent ? (
+        <AddEditExperienceComponent
+          onAddExperienceButtonClick={onAddExperienceButtonClick}
+          experienceToEdit={experienceToEdit}
+        />
+      ) : (
+        <ViewExperiencesComponent onEditExperience={handleExperienceToEdit} />
+      )}
       <br></br>
       <br></br>
-      {displayAddExperienceButton && <button onClick={onAddExperienceButtonClick}>Add Experience</button>}
+      {displayAddExperienceButton && (
+        <button onClick={onAddExperienceButtonClick}>Add Experience</button>
+      )}
     </div>
   );
-
 }
 
 export default ExperienceComponent;

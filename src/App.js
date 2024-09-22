@@ -8,12 +8,12 @@ function App() {
       <h1>Resume Builder</h1>
       <div className="resumeSection">
         <h2>User Information</h2>
-        <UserInformationComponent/>
+        <UserInformationComponent />
         <br></br>
       </div>
       <div className="resumeSection">
         <h2>Experience</h2>
-        <ExperienceComponent/>
+        <ExperienceComponent />
         <br></br>
       </div>
       <div className="resumeSection">
