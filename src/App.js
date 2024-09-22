@@ -1,4 +1,5 @@
 import "./App.css";
+import ExperienceComponent from "./features/experience/ExperienceComponent";
 
 function App() {
   return (
@@ -6,8 +7,7 @@ function App() {
       <h1>Resume Builder</h1>
       <div className="resumeSection">
         <h2>Experience</h2>
-        <p>Experience Placeholder</p>
-        <button>Add Experience</button>
+        <ExperienceComponent/>
         <br></br>
       </div>
       <div className="resumeSection">
