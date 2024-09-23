@@ -1,3 +1,4 @@
+// placeholder for API data
 let data = {
   experience: [
     {
