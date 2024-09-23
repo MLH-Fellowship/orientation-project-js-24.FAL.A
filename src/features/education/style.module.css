@@ -1,0 +1,71 @@
+.cancelButton {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+[type="submit"] {
+  border-radius: 4px;
+  background-color: rgb(248 185 42);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+.submitButton:disabled {
+  opacity: 60%;
+}
+
+.EduForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+
+.formBody {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin: 4px auto;
+  font-weight: 700;
+}
+
+.inputs {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  gap: 2px;
+  padding: 8px;
+}
+
+.eduLabel {
+  padding: 2px 20px;
+}
+.eduInput {
+  width: 85%;
+  margin: 2px auto;
+  padding: 12px 20px;
+  font-size: medium;
+}
+
+input::placeholder {
+  opacity: 50%;
+}
+
+.formButtons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 32px;
+}

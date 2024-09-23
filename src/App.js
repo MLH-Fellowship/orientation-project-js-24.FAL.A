@@ -10,6 +10,7 @@ import {
   StyleSheet,
 } from "@react-pdf/renderer";
 import AddSkills from "./features/skills/addSkills";
+import AddEducation from "./features/education/addEducation";
 
 const styles = StyleSheet.create({
   page: {
@@ -82,8 +83,7 @@ function App() {
 
       <div className="resumeSection">
         <h2>Education</h2>
-        <p>Education Placeholder</p>
-        <button>Add Education</button>
+        <AddEducation />
         <br></br>
       </div>
 
