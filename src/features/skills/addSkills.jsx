@@ -33,7 +33,7 @@ export default function AddSkills() {
 
   const addSkill = async (newSkill) => {
     await fetchSkills();
-    setShowForm(false); 
+    setShowForm(false);
   };
 
   const updateSkill = async (updatedSkill) => {
@@ -63,7 +63,7 @@ export default function AddSkills() {
           ) : (
             <ViewSkills skills={skills} onEditSkills={handleEditSkill} />
           )}
-          <div className={styles.btncontainer} >
+          <div className={styles.btncontainer}>
             <button
               onClick={() => {
                 setSkillToEdit(null);
@@ -77,4 +77,4 @@ export default function AddSkills() {
       )}
     </section>
   );
-}  
+}
