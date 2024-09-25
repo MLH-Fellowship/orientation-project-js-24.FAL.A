@@ -1,5 +1,10 @@
 import { React, useEffect, useState } from "react";
-import { API_URL } from "../../constants";
+import {
+  API_URL,
+  EMAIL_ADDRESS_REGEX,
+  PHONE_NUMBER_REGEX,
+} from "../../constants";
+import "./UserInformationComponent.css";
 
 function AddUserInformationComponent({ onSubmit, userInfoToEdit }) {
   const defaultUserInformation = {
@@ -29,6 +34,13 @@ function AddUserInformationComponent({ onSubmit, userInfoToEdit }) {
     });
   };
 
+  const handleBlur = (name) => {
+    setErrors((prevErrors) => {
+      const { [name]: _, ...rest } = prevErrors;
+      return rest;
+    });
+  };
+
   const validateForm = () => {
     const newErrors = {};
 
@@ -36,12 +48,12 @@ function AddUserInformationComponent({ onSubmit, userInfoToEdit }) {
       newErrors.name = "Name is required!";
     }
 
-    const internationalPhoneFormat = /^\+\d{1,3}\d{7,14}$/;
-    if (internationalPhoneFormat.test(formData.phone_number)) {
+    const internationalPhoneFormat = PHONE_NUMBER_REGEX;
+    if (!internationalPhoneFormat.test(formData.phone_number)) {
       newErrors.phone_number = "Please enter a valid phone number";
     }
 
-    const emailFormat = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailFormat = EMAIL_ADDRESS_REGEX;
     if (!emailFormat.test(formData.email_address)) {
       newErrors.email_address = "Please enter a valid email address.";
     }
@@ -102,9 +114,10 @@ function AddUserInformationComponent({ onSubmit, userInfoToEdit }) {
   return (
     <form onSubmit={submitForm}>
       <div className="form-group">
-        <label>
-          <br></br>
-          <h4>Name</h4>
+        <div className="input-group">
+          <label htmlFor="name">
+            <h4>Name</h4>
+          </label>
           <input
             type="text"
             name="name"
@@ -112,26 +125,33 @@ function AddUserInformationComponent({ onSubmit, userInfoToEdit }) {
             placeholder="Your Name"
             value={formData.name}
             onChange={handleChange}
+            onBlur={() => handleBlur("name")}
           />
-        </label>
-        {errors.name && <span style={{ color: "red" }}>{errors.name}</span>}
-        <label>
-          <h4>
-            Phone Number<br></br>(with country code)
-          </h4>
+          {errors.name && <span className="error-message">{errors.name}</span>}
+        </div>
+
+        <div className="input-group">
+          <label htmlFor="phone_bumber">
+            <h4>Phone Number</h4>
+          </label>
           <input
             type="tel"
             name="phone_number"
             required
-            placeholder="+1234567890"
+            placeholder="+1 234-567-890"
             value={formData.phone_number}
             onChange={handleChange}
+            onBlur={() => handleBlur("phone_number")}
           />
-        </label>
-        {errors.phone && <span style={{ color: "red" }}>{errors.phone}</span>}
+          {errors.phone_number && (
+            <span className="error-message">{errors.phone_number}</span>
+          )}
+        </div>
 
-        <label>
-          <h4>Email Address</h4>
+        <div className="input-group">
+          <label htmlFor="email_address">
+            <h4>Email Address</h4>
+          </label>
           <input
             type="email"
             name="email_address"
@@ -139,9 +159,12 @@ function AddUserInformationComponent({ onSubmit, userInfoToEdit }) {
             placeholder="example@email.com"
             value={formData.email_address}
             onChange={handleChange}
+            onBlur={() => handleBlur("email_address")}
           />
-        </label>
-        {errors.email && <span style={{ color: "red" }}>{errors.email}</span>}
+          {errors.email_address && (
+            <span className="error-message">{errors.email_address}</span>
+          )}
+        </div>
       </div>
 
       <div className="buttonGroup">

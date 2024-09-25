@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { API_URL } from "../../constants";
+import "./UserInformationComponent.css";
 
 function ViewUserInformationComponent({ onEditUserInfo }) {
   const [userInformation, setUserInformation] = useState(null);
