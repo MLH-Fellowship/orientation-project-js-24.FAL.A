@@ -59,3 +59,8 @@ input::placeholder {
 .btncontainer{
   margin-top: 5%;
 }
+
+.error {
+  color: red;
+  margin-top: 10px;
+}

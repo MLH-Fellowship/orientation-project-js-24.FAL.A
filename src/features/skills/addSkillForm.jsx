@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./style.module.css";
 import { API_URL } from "../../constants";
+import Dropzone from "react-dropzone";
 
 export default function AddSkillForm({ setShowForm, addSkill, skillToEdit, onUpdate }) {
   const [name, setName] = useState("");
@@ -99,32 +100,38 @@ export default function AddSkillForm({ setShowForm, addSkill, skillToEdit, onUpd
           <>
             <div className={styles.inputs}>
               <label htmlFor="logo">Logo: </label>
-              <input
-                type="file"
-                name="logo"
-                id="logo"
-                placeholder="add skill logo ..."
-                onChange={(e) => setLogo(e.target.files[0].name)}
-              />
-            </div>
-
-            <div>
-              <p>Current logo:</p>
-              <img src={logo} alt={name} /> 
+              <Dropzone
+              onDrop={(acceptedFiles) => {
+                setLogo(acceptedFiles[0]); 
+              }}
+            >
+              {({ getRootProps, getInputProps }) => (
+                <section className={styles.dropzone} {...getRootProps()}>
+                  <input {...getInputProps()} />
+                    <p style={{backgrounColor:'white', padding: '10px'}}>Drag and drop your files here, or click to browse for files.</p>
+                  {logo && <p>Current file: {skillToEdit.name}</p>}
+                </section>
+              )}
+              </Dropzone>
             </div>
           </>
 
         ):(
           <div className={styles.inputs}>
             <label htmlFor="logo">Logo: </label>
-            <input
-              type="file"
-              name="logo"
-              id="logo"
-              placeholder="add skill logo ..."
-              onChange={(e) => setLogo(e.target.files[0].name)}
-              required
-            />
+            <Dropzone
+            onDrop={(acceptedFiles) => {
+              setLogo(acceptedFiles[0]); 
+            }}
+          >
+            {({ getRootProps, getInputProps }) => (
+              <section className={styles.dropzone} {...getRootProps()}>
+                <input {...getInputProps()} />
+                  <p style={{backgrounColor:'white', padding: '10px'}}>Drag and drop your files here, or click to browse for files.</p>
+                {logo && <p>Current file: {skillToEdit.name}</p>}
+              </section>
+            )}
+            </Dropzone>
           </div>
         )}
 
