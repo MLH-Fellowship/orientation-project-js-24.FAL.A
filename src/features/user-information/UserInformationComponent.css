@@ -1,0 +1,29 @@
+.input-group {
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.error-message {
+  color: red;
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  font-size: 0.875em;
+  height: 1em;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input {
+  width: 90%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
