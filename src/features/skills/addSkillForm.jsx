@@ -1,11 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./style.module.css";
 import { API_URL } from "../../constants";
+import Dropzone from "react-dropzone";
 
-export default function AddSkillForm({ setShowForm }) {
+export default function AddSkillForm({ setShowForm, addSkill, skillToEdit, onUpdate }) {
   const [name, setName] = useState("");
   const [proficiency, setProficiency] = useState("");
-  const [logo, setLogo] = useState("");
+  const [logo, setLogo] = useState(null);
+
+  useEffect(() => {
+    if (skillToEdit) {
+      setName(skillToEdit.name);
+      setProficiency(skillToEdit.proficiency);
+      setLogo(skillToEdit.logo);
+    }
+  }, [skillToEdit]);
 
   const handleAddSkill = async (e) => {
     e.preventDefault();
@@ -17,24 +26,44 @@ export default function AddSkillForm({ setShowForm }) {
     };
     console.log(JSON.stringify(data));
     try {
-      const response = await fetch(`${API_URL}/resume/skill`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-      if (response.ok) {
-        alert("Skill was added successfully!!");
+      let response="";
+      console.log(logo);
+      if(skillToEdit){
+        response = await fetch(`${API_URL}/resume/skill/${skillToEdit.index}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
+
+        if (response.ok) {
+          const updatedSkill = { ...skillToEdit, name, proficiency, logo }; 
+          onUpdate(updatedSkill);
+        }
+  
+      }else{
+        response = await fetch(`${API_URL}/resume/skill`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
+
+        if (response.ok) {
+          const newSkill = await response.json();
+          addSkill(newSkill);
+        }
+      }
+
         setName("");
         setProficiency("");
-        setLogo("");
-      } else {
-        alert("Failed to add the skill");
-      }
-    } catch (error) {
+        setLogo(null);
+        setShowForm(false);
+      } catch (error) {
       console.error("Error adding skill:", error);
-      alert("An error occurred while adding the skill");
+      console.log("An error occurred while adding the skill");
     }
   };
 
@@ -66,18 +95,46 @@ export default function AddSkillForm({ setShowForm }) {
             required
           />
         </div>
-        <div className={styles.inputs}>
-          <label htmlFor="proficiency">Logo: </label>
-          <input
-            type="file"
-            name="logo"
-            id="logo"
-            placeholder="add skill logo ..."
-            value={logo}
-            onChange={(e) => setLogo(e.target.value)}
-            required
-          />
-        </div>
+
+        {logo ? (
+          <>
+            <div className={styles.inputs}>
+              <label htmlFor="logo">Logo: </label>
+              <Dropzone
+              onDrop={(acceptedFiles) => {
+                setLogo(acceptedFiles[0]); 
+              }}
+            >
+              {({ getRootProps, getInputProps }) => (
+                <section className={styles.dropzone} {...getRootProps()}>
+                  <input {...getInputProps()} />
+                    <p style={{backgrounColor:'white', padding: '10px'}}>Drag and drop your files here, or click to browse for files.</p>
+                  {logo && <p>Current file: {logo.name}</p>}
+                </section>
+              )}
+              </Dropzone>
+            </div>
+          </>
+
+        ):(
+          <div className={styles.inputs}>
+            <label htmlFor="logo">Logo: </label>
+            <Dropzone
+            onDrop={(acceptedFiles) => {
+              setLogo(acceptedFiles[0]); 
+            }}
+          >
+            {({ getRootProps, getInputProps }) => (
+              <section className={styles.dropzone} {...getRootProps()}>
+                <input {...getInputProps()} />
+                  <p style={{backgrounColor:'white', padding: '10px'}}>Drag and drop your files here, or click to browse for files.</p>
+                {logo && <p>Current file: {logo.name}</p>}
+              </section>
+            )}
+            </Dropzone>
+          </div>
+        )}
+
       </div>
       <div className={styles.formButtons}>
         <button
