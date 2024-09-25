@@ -7,11 +7,13 @@
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
+    "dropzone": "^6.0.0-beta.2",
     "eslint": "^8.40.0",
     "eslint-plugin-react": "^7.32.2",
     "os-browserify": "^0.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-dropzone": "^14.2.3",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.0"
   },

@@ -55,3 +55,12 @@ input::placeholder {
   flex-wrap: wrap;
   gap: 32px;
 }
+
+.btncontainer{
+  margin-top: 5%;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+}
