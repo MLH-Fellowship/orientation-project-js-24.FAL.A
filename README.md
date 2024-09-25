@@ -50,22 +50,23 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 If you prefer to use npm instead of yarn, follow these instructions:
 
 ### `npm install`
+
 Installs the necessary dependencies to run the project.
 
 ### `npm start`
+
 Runs the app in development mode.
 Open http://localhost:3000 to view it in your browser.
-
 
 The page will reload when you make changes.
 You may also see any lint errors in the console.
 
 ### `npm run build`
+
 Builds the app for production to the `build` folder.
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
 
 ## Learn More
 
