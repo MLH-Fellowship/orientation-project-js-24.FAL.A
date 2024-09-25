@@ -20,15 +20,13 @@ export default function ViewSkills({ skills, onEditSkills }) {
                 <td>{skill.proficiency}</td>
                 <td>
                   {skill.logo && (
-                    <img
-                      src={skill.logo}
-                      alt={skill.name}
-                      width={50}
-                    />
+                    <img src={skill.logo} alt={skill.name} width={50} />
                   )}
                 </td>
                 <td>
-                  <button onClick={() => onEditSkills(skill, index)}>Edit</button>
+                  <button onClick={() => onEditSkills(skill, index)}>
+                    Edit
+                  </button>
                 </td>
               </tr>
             ))
