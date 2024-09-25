@@ -109,7 +109,7 @@ export default function AddSkillForm({ setShowForm, addSkill, skillToEdit, onUpd
                 <section className={styles.dropzone} {...getRootProps()}>
                   <input {...getInputProps()} />
                     <p style={{backgrounColor:'white', padding: '10px'}}>Drag and drop your files here, or click to browse for files.</p>
-                  {logo && <p>Current file: {skillToEdit.name}</p>}
+                  {logo && <p>Current file: {logo.name}</p>}
                 </section>
               )}
               </Dropzone>
@@ -128,7 +128,7 @@ export default function AddSkillForm({ setShowForm, addSkill, skillToEdit, onUpd
               <section className={styles.dropzone} {...getRootProps()}>
                 <input {...getInputProps()} />
                   <p style={{backgrounColor:'white', padding: '10px'}}>Drag and drop your files here, or click to browse for files.</p>
-                {logo && <p>Current file: {skillToEdit.name}</p>}
+                {logo && <p>Current file: {logo.name}</p>}
               </section>
             )}
             </Dropzone>
