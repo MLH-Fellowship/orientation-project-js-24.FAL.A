@@ -49,9 +49,6 @@ function AddEditExperienceComponent({
     }
 
     fetch(`${API_URL}/resume/experience`, {
-      headers: {
-        "Content-Type": "application/json",
-      },
       method: "POST",
       body: data,
     })
