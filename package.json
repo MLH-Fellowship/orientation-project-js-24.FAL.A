@@ -19,6 +19,7 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
+    "start2": "Prettier --write",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
