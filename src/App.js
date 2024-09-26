@@ -11,7 +11,6 @@ import {
 } from "@react-pdf/renderer";
 import AddEducation from "./features/education/addEducation";
 import AddSkills from "./features/skills/addSkills";
-import AddEducation from "./features/education/addEducation";
 import UserInformationComponent from "./features/user-information/UserInformationComponent";
 
 const styles = StyleSheet.create({
