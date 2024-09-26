@@ -12,8 +12,8 @@ function ViewUserInformationComponent({ onEditUserInfo }) {
     })
       .then((response) => response.json())
       .then((data) => {
-        if (data && typeof data === "object" && data.name) {
-          setUserInformation(data);
+        if (data && Array.isArray(data) && data.length > 0) {
+          setUserInformation(data[0]);
           console.log(data);
         } else {
           setError(true);
@@ -27,11 +27,9 @@ function ViewUserInformationComponent({ onEditUserInfo }) {
   return (
     <div>
       {error ? (
-        <p>Error in fetching user information. Please refresh.</p>
+        <p>No User information added yet!</p>
       ) : userInformation === null ? (
         <p>Loading user information....</p>
-      ) : userInformation.length < 1 ? (
-        <p>No user information added yet :(</p>
       ) : (
         <table>
           <thead>
