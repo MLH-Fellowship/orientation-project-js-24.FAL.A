@@ -9,6 +9,7 @@ import {
   View,
   StyleSheet,
 } from "@react-pdf/renderer";
+import AddEducation from "./features/education/addEducation";
 import AddSkills from "./features/skills/addSkills";
 import UserInformationComponent from "./features/user-information/UserInformationComponent";
 
@@ -74,7 +75,6 @@ function App() {
   return (
     <div className="App">
       <h1>Resume Builder</h1>
-
       <div className="resumeSection">
         <h2>User Information</h2>
         <UserInformationComponent />
@@ -88,8 +88,7 @@ function App() {
 
       <div className="resumeSection">
         <h2>Education</h2>
-        <p>Education Placeholder</p>
-        <button>Add Education</button>
+        <AddEducation />
         <br></br>
       </div>
 
