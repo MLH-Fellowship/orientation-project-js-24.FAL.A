@@ -11,6 +11,7 @@ import {
 } from "@react-pdf/renderer";
 import AddEducation from "./features/education/addEducation";
 import AddSkills from "./features/skills/addSkills";
+import UserInformationComponent from "./features/user-information/UserInformationComponent";
 
 const styles = StyleSheet.create({
   page: {
@@ -74,6 +75,11 @@ function App() {
   return (
     <div className="App">
       <h1>Resume Builder</h1>
+      <div className="resumeSection">
+        <h2>User Information</h2>
+        <UserInformationComponent />
+        <br></br>
+      </div>
       <div className="resumeSection">
         <h2>Experience</h2>
         <ExperienceComponent />
