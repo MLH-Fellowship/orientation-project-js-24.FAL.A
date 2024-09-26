@@ -150,7 +150,11 @@ export default function AddEducationForm({ setShowForm }) {
         >
           Cancel
         </button>
-        <button type="submit" className={styles.submitButton} disabled={loading}>
+        <button
+          type="submit"
+          className={styles.submitButton}
+          disabled={loading}
+        >
           {loading ? "Loading..." : "Submit"}
         </button>
       </div>

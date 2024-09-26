@@ -148,13 +148,19 @@ function App() {
 
       {resumeData && (
         <button>
-          <PDFDownloadLink document={<MyDoc resumeData={resumeData} />} fileName="resume.pdf">
-            {({ loading }) => (loading ? "Generating PDF..." : "Download Resume")}
+          <PDFDownloadLink
+            document={<MyDoc resumeData={resumeData} />}
+            fileName="resume.pdf"
+          >
+            {({ loading }) =>
+              loading ? "Generating PDF..." : "Download Resume"
+            }
           </PDFDownloadLink>
         </button>
       )}
 
-      <br /><br />
+      <br />
+      <br />
 
       <button onClick={handleResetData}>Reset Data</button>
     </div>
