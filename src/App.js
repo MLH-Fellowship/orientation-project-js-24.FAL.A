@@ -74,7 +74,6 @@ function App() {
   return (
     <div className="App">
       <h1>Resume Builder</h1>
-
       <div className="resumeSection">
         <h2>Experience</h2>
         <ExperienceComponent />
