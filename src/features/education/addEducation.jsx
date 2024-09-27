@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import AddEducationForm from "./addEducationForm";
+import EditEducationForm from "./editEducationForm";
 import ViewEducation from "./ViewEducation";
 import { API_URL } from "../../constants";
 import styles from "./style.module.css";
 
 export default function AddEducation() {
   const [showForm, setShowForm] = useState(false);
+  const [showEditForm, setShowEditForm] = useState(false);
   const [educations, setEducations] = useState([]);
   const [error, setError] = useState(false);
   const [educationToEdit, setEducationToEdit] = useState(null);
@@ -38,13 +40,13 @@ export default function AddEducation() {
 
   const updateEducation = async (updatedEducation) => {
     await fetchEducations();
-    setShowForm(false);
+    setShowEditForm(false);
     setEducationToEdit(null);
   };
 
   const handleEditEducation = (education, index) => {
     setEducationToEdit({ ...education, index });
-    setShowForm(true);
+    setShowEditForm(true);
   };
 
   return (
@@ -53,6 +55,10 @@ export default function AddEducation() {
         <AddEducationForm
           setShowForm={setShowForm}
           addEducation={addEducation}
+        />
+      ) : showEditForm ? (
+        <EditEducationForm
+          setShowForm={setShowEditForm}
           educationToEdit={educationToEdit}
           onUpdate={updateEducation}
         />

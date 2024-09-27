@@ -1,31 +1,15 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "./style.module.css";
 import { API_URL } from "../../constants";
 import Dropzone from "react-dropzone";
 
-export default function AddEducationForm({
-  setShowForm,
-  addEducation,
-  educationToEdit,
-  onUpdate,
-}) {
+export default function AddEducationForm({ setShowForm, addEducation }) {
   const [course, setCourse] = useState("");
   const [school, setSchool] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [grade, setGrade] = useState("");
   const [logo, setLogo] = useState(null);
-
-  useEffect(() => {
-    if (educationToEdit) {
-      setCourse(educationToEdit.course);
-      setSchool(educationToEdit.school);
-      setStartDate(educationToEdit.start_date);
-      setEndDate(educationToEdit.end_date);
-      setGrade(educationToEdit.grade);
-      setLogo(educationToEdit.logo);
-    }
-  }, [educationToEdit]);
 
   const handleAddEducation = async (e) => {
     e.preventDefault();
@@ -41,55 +25,25 @@ export default function AddEducationForm({
     }
 
     try {
-      let response = "";
-      if (educationToEdit) {
-        response = await fetch(
-          `${API_URL}/resume/education/${educationToEdit.index}`,
-          {
-            method: "PUT",
-            body: formData,
-          },
-        );
+      const response = await fetch(`${API_URL}/resume/education`, {
+        method: "POST",
+        body: formData,
+      });
 
-        if (response.ok) {
-          const updatedEducation = {
-            ...educationToEdit,
-            course,
-            school,
-            start_date: startDate,
-            end_date: endDate,
-            grade,
-            logo,
-          };
-          onUpdate(updatedEducation);
-        }
-      } else {
-        response = await fetch(`${API_URL}/resume/education`, {
-          method: "POST",
-          body: formData,
-        });
-
-        if (response.ok) {
-          const newEducation = await response.json();
-          addEducation(newEducation);
-        }
+      if (response.ok) {
+        const newEducation = await response.json();
+        addEducation(newEducation);
+        setShowForm(false);
       }
-
-      setCourse("");
-      setSchool("");
-      setStartDate("");
-      setEndDate("");
-      setGrade("");
-      setLogo(null);
-      setShowForm(false);
     } catch (error) {
       console.error("Error adding education:", error);
     }
   };
 
   return (
-    <form className={styles.form} onSubmit={(e) => handleAddEducation(e)}>
+    <form className={styles.form} onSubmit={handleAddEducation}>
       <div className={styles.formBody}>
+        {/* Form Fields */}
         <div className={styles.inputs}>
           <label htmlFor="course">Course: </label>
           <input
@@ -100,7 +54,6 @@ export default function AddEducationForm({
             value={course}
             onChange={(e) => setCourse(e.target.value)}
             required
-            minLength={3}
           />
         </div>
         <div className={styles.inputs}>
@@ -113,7 +66,6 @@ export default function AddEducationForm({
             value={school}
             onChange={(e) => setSchool(e.target.value)}
             required
-            minLength={3}
           />
         </div>
         <div className={styles.inputs}>
@@ -152,13 +104,11 @@ export default function AddEducationForm({
             required
           />
         </div>
+
+        {/* Logo Upload Section */}
         <div className={styles.inputs}>
           <label htmlFor="logo">Logo: </label>
-          <Dropzone
-            onDrop={(acceptedFiles) => {
-              setLogo(acceptedFiles[0]);
-            }}
-          >
+          <Dropzone onDrop={(acceptedFiles) => setLogo(acceptedFiles[0])}>
             {({ getRootProps, getInputProps }) => (
               <section className={styles.dropzoneContainer} {...getRootProps()}>
                 <input {...getInputProps()} />
@@ -179,6 +129,7 @@ export default function AddEducationForm({
           </Dropzone>
         </div>
       </div>
+
       <div className={styles.formButtons}>
         <button
           type="button"
