@@ -37,16 +37,19 @@ export default function AddEducationForm({
     formData.append("end_date", endDate);
     formData.append("grade", grade);
     if (logo) {
-      formData.append("logo", logo); 
+      formData.append("logo", logo);
     }
 
     try {
       let response = "";
       if (educationToEdit) {
-        response = await fetch(`${API_URL}/resume/education/${educationToEdit.index}`, {
-          method: "PUT",
-          body: formData,
-        });
+        response = await fetch(
+          `${API_URL}/resume/education/${educationToEdit.index}`,
+          {
+            method: "PUT",
+            body: formData,
+          },
+        );
 
         if (response.ok) {
           const updatedEducation = {
@@ -158,14 +161,20 @@ export default function AddEducationForm({
           >
             {({ getRootProps, getInputProps }) => (
               <section className={styles.dropzoneContainer} {...getRootProps()}>
-              <input {...getInputProps()} />
-              <div className={styles.dropzoneContent}>
-                <p className={styles.dropzoneText}>
-                  Drag & drop your file here, or <span className={styles.browseText}>browse</span> to select a file.
-                </p>
-                {logo && <p className={styles.fileName}>Selected file: {logo.name}</p>}
-              </div>
-            </section>            
+                <input {...getInputProps()} />
+                <div className={styles.dropzoneContent}>
+                  <p className={styles.dropzoneText}>
+                    Drag & drop your file here, or{" "}
+                    <span className={styles.browseText}>browse</span> to select
+                    a file.
+                  </p>
+                  {logo && (
+                    <p className={styles.fileName}>
+                      Selected file: {logo.name}
+                    </p>
+                  )}
+                </div>
+              </section>
             )}
           </Dropzone>
         </div>

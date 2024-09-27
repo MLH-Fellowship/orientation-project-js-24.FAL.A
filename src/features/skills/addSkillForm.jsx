@@ -111,12 +111,18 @@ export default function AddSkillForm({
               >
                 {({ getRootProps, getInputProps }) => (
                   <section className={styles.dropzone} {...getRootProps()}>
-                  <input {...getInputProps()} />
-                  <p className={styles.dropzoneText}>
-                    Drag and drop your files here, or <span className={styles.browseText}>click</span> to browse for files.
-                  </p>
-                  {logo && <p className={styles.fileName}>Current file: {logo.name}</p>}
-                </section>                
+                    <input {...getInputProps()} />
+                    <p className={styles.dropzoneText}>
+                      Drag and drop your files here, or{" "}
+                      <span className={styles.browseText}>click</span> to browse
+                      for files.
+                    </p>
+                    {logo && (
+                      <p className={styles.fileName}>
+                        Current file: {logo.name}
+                      </p>
+                    )}
+                  </section>
                 )}
               </Dropzone>
             </div>

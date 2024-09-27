@@ -28,7 +28,7 @@ export default function ViewEducation({ educations, onEditEducation }) {
                 <td>
                   {education.logo && (
                     <img
-                      src={`${API_URL}/uploads/${education.logo}`} 
+                      src={`${API_URL}/uploads/${education.logo}`}
                       alt={education.course}
                       width={50}
                     />
