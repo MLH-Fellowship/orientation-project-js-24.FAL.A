@@ -38,11 +38,11 @@ export default function AddEducationForm({ setShowForm }) {
         setGrade("");
         setLogo(null);
       } else {
-        alert("Failed to add the education entry");
+        alert("Failed to add the Education");
       }
     } catch (error) {
-      console.error("Error adding education:", error);
-      alert("An error occurred while adding the education entry");
+      console.error("Error adding Education:", error);
+      alert("An error occurred while adding the Education");
     }
     setLoading(false);
   };
