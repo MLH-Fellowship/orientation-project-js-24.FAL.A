@@ -8,30 +8,27 @@ export default function AddEducationForm({ setShowForm }) {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [grade, setGrade] = useState("");
-  const [logo, setLogo] = useState("");
+  const [logo, setLogo] = useState(null); // Change to handle file input
 
   const [loading, setLoading] = useState(false);
 
   const handleAddEducation = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const data = {
-      course,
-      school,
-      start_date: startDate,
-      end_date: endDate,
-      grade,
-      logo,
-    };
-    console.log(JSON.stringify(data));
+    const formData = new FormData();
+    formData.append("course", course);
+    formData.append("school", school);
+    formData.append("start_date", startDate); // Change to match backend field
+    formData.append("end_date", endDate); // Change to match backend field
+    formData.append("grade", grade);
+    formData.append("logo", logo); // Append the file
+
     try {
       const response = await fetch(`${API_URL}/resume/education`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
+        body: formData,
       });
+
       if (response.ok) {
         alert("Education was added successfully!!");
         setCourse("");
@@ -39,7 +36,7 @@ export default function AddEducationForm({ setShowForm }) {
         setStartDate("");
         setEndDate("");
         setGrade("");
-        setLogo("");
+        setLogo(null);
       } else {
         alert("Failed to add the Education");
       }
@@ -51,7 +48,7 @@ export default function AddEducationForm({ setShowForm }) {
   };
 
   return (
-    <form className={styles.EduForm} onSubmit={(e) => handleAddEducation(e)}>
+    <form className={styles.EduForm} onSubmit={handleAddEducation}>
       <div className={styles.formBody}>
         <div className={styles.inputs}>
           <label htmlFor="course" className={styles.eduLabel}>
@@ -61,7 +58,7 @@ export default function AddEducationForm({ setShowForm }) {
             type="text"
             name="course"
             id="course"
-            placeholder="add Course ..."
+            placeholder="Add Course ..."
             value={course}
             onChange={(e) => setCourse(e.target.value)}
             required
@@ -77,7 +74,7 @@ export default function AddEducationForm({ setShowForm }) {
             type="text"
             name="school"
             id="school"
-            placeholder="add school name ..."
+            placeholder="Add School Name ..."
             value={school}
             onChange={(e) => setSchool(e.target.value)}
             required
@@ -93,7 +90,7 @@ export default function AddEducationForm({ setShowForm }) {
             type="text"
             name="startDate"
             id="startDate"
-            placeholder="Ex:October 2021 ..."
+            placeholder="Ex: October 2021 ..."
             value={startDate}
             onChange={(e) => setStartDate(e.target.value)}
             required
@@ -109,7 +106,7 @@ export default function AddEducationForm({ setShowForm }) {
             type="text"
             name="endDate"
             id="endDate"
-            placeholder="Ex:October 2022 ..."
+            placeholder="Ex: October 2022 ..."
             value={endDate}
             onChange={(e) => setEndDate(e.target.value)}
             required
@@ -125,7 +122,7 @@ export default function AddEducationForm({ setShowForm }) {
             type="text"
             name="grade"
             id="grade"
-            placeholder="Ex:86% ..."
+            placeholder="Ex: 86% ..."
             value={grade}
             onChange={(e) => setGrade(e.target.value)}
             required
@@ -139,9 +136,8 @@ export default function AddEducationForm({ setShowForm }) {
             type="file"
             name="logo"
             id="logo"
-            placeholder="add skill logo ..."
-            value={logo}
-            onChange={(e) => setLogo(e.target.value)}
+            placeholder="Add logo ..."
+            onChange={(e) => setLogo(e.target.files[0])}
             required
           />
         </div>
