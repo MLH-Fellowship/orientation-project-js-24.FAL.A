@@ -69,3 +69,41 @@ input::placeholder {
   flex-wrap: wrap;
   gap: 32px;
 }
+
+.dropzoneContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.dropzoneContainer:hover {
+  background-color: #eaeaea;
+}
+
+.dropzoneContent {
+  text-align: center;
+}
+
+.dropzoneText {
+  font-size: 16px;
+  color: #333;
+}
+
+.browseText {
+  color: #007bff;
+  font-weight: bold;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.fileName {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #555;
+}
