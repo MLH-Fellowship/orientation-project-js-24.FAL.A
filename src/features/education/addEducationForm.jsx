@@ -18,8 +18,8 @@ export default function AddEducationForm({ setShowForm }) {
     const data = {
       course,
       school,
-      startDate,
-      endDate,
+      start_date: startDate,
+      end_date: endDate,
       grade,
       logo,
     };
@@ -33,7 +33,7 @@ export default function AddEducationForm({ setShowForm }) {
         body: JSON.stringify(data),
       });
       if (response.ok) {
-        alert("Skill was added successfully!!");
+        alert("Education was added successfully!!");
         setCourse("");
         setSchool("");
         setStartDate("");
@@ -41,11 +41,11 @@ export default function AddEducationForm({ setShowForm }) {
         setGrade("");
         setLogo("");
       } else {
-        alert("Failed to add the skill");
+        alert("Failed to add the Education");
       }
     } catch (error) {
-      console.error("Error adding skill:", error);
-      alert("An error occurred while adding the skill");
+      console.error("Error adding Education:", error);
+      alert("An error occurred while adding the Education");
     }
     setLoading(false);
   };
