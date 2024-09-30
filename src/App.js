@@ -134,7 +134,7 @@ function App() {
       performSpellcheck(resumeData);
     }
   };
-  
+
   const performSpellcheck = (data) => {
     fetch(`${API_URL}/resume/spellcheck`, {
       method: "POST",
@@ -150,7 +150,7 @@ function App() {
       .then((response) => response.json())
       .then((spellcheckData) => setSpellcheckResults(spellcheckData))
       .catch((error) => console.error("Spellcheck error:", error));
-  };   
+  };
 
   return (
     <div className="App">
@@ -200,22 +200,24 @@ function App() {
       <button onClick={handleSpellcheck}>Check Spelling</button>
 
       {spellcheckResults && (
-      <div>
-        <h2>Spellcheck Suggestions:</h2>
-        {spellcheckResults
-          .filter((result) => result.after.length > 0)
-          .map((result, index) => (
-            <div key={index}>
-              <p><strong>Original:</strong> {result.before}</p>
-              <p><strong>Suggestions:</strong> {result.after.join(", ")}</p>
-            </div>
-          ))}
-        {spellcheckResults.filter((result) => result.after.length > 0).length === 0 && (
-          <p>No spelling mistakes found!</p> 
-        )}
-      </div>
-    )}
-
+        <div>
+          <h2>Spellcheck Suggestions:</h2>
+          {spellcheckResults
+            .filter((result) => result.after.length > 0)
+            .map((result, index) => (
+              <div key={index}>
+                <p>
+                  <strong>Original:</strong> {result.before}
+                </p>
+                <p>
+                  <strong>Suggestions:</strong> {result.after.join(", ")}
+                </p>
+              </div>
+            ))}
+          {spellcheckResults.filter((result) => result.after.length > 0)
+            .length === 0 && <p>No spelling mistakes found!</p>}
+        </div>
+      )}
 
       <br />
       <br />
