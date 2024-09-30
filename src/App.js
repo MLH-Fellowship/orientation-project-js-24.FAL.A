@@ -82,6 +82,7 @@ const MyDoc = ({ resumeData }) => (
 
 function App() {
   const [resumeData, setResumeData] = useState(null);
+  const [spellcheckResults, setSpellcheckResults] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
@@ -112,6 +113,43 @@ function App() {
       .catch((err) => {
         console.error("Error resetting data:", err);
       });
+  };
+
+  const handleSpellcheck = () => {
+    if (!resumeData) {
+      setLoading(true);
+      fetch(`${API_URL}/resume/data`)
+        .then((response) => response.json())
+        .then((data) => {
+          setResumeData(data);
+          performSpellcheck(data);
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.error("Error fetching resume data for spellcheck:", err);
+          setError(true);
+          setLoading(false);
+        });
+    } else {
+      performSpellcheck(resumeData);
+    }
+  };
+
+  const performSpellcheck = (data) => {
+    fetch(`${API_URL}/resume/spellcheck`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        experience: data.experience || [],
+        education: data.education || [],
+        skill: data.skill || [],
+      }),
+    })
+      .then((response) => response.json())
+      .then((spellcheckData) => setSpellcheckResults(spellcheckData))
+      .catch((error) => console.error("Spellcheck error:", error));
   };
 
   return (
@@ -157,6 +195,28 @@ function App() {
             }
           </PDFDownloadLink>
         </button>
+      )}
+
+      <button onClick={handleSpellcheck}>Check Spelling</button>
+
+      {spellcheckResults && (
+        <div>
+          <h2>Spellcheck Suggestions:</h2>
+          {spellcheckResults
+            .filter((result) => result.after.length > 0)
+            .map((result, index) => (
+              <div key={index}>
+                <p>
+                  <strong>Original:</strong> {result.before}
+                </p>
+                <p>
+                  <strong>Suggestions:</strong> {result.after.join(", ")}
+                </p>
+              </div>
+            ))}
+          {spellcheckResults.filter((result) => result.after.length > 0)
+            .length === 0 && <p>No spelling mistakes found!</p>}
+        </div>
       )}
 
       <br />
